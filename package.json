@@ -1,0 +1,31 @@
+{
+  "name": "loopback3_tests_generator",
+  "version": "0.1.0",
+  "description": "Plop Generator of Mocha tests for Loopback 3 using Supertest and Chai",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "plop": "./node_modules/.bin/plop",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Loopback",
+    "plop",
+    "test",
+    "generator",
+    "mocha",
+    "chai",
+    "supertest"
+  ],
+  "author": "Diego Soler",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "lodash": "^4.17.15",
+    "numeral": "^2.0.6"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0"
+  }
+}

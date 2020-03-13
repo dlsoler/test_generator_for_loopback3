@@ -1,0 +1,6 @@
+{
+  "specs_pathname": "testing_data/specs.json",
+  "output_directory": "results",
+  "api_url_prefix": "/api",
+  "test_timeout": 3000
+}

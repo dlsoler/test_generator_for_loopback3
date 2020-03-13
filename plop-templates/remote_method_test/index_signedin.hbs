@@ -1,0 +1,78 @@
+'use strict';
+/* eslint max-len: 0 */
+
+/*
+ *
+ * {{ suiteName }}
+ * Signed in testing
+ *
+ */
+
+const supertest = require('supertest');
+
+// Utils used for user Sign-in and sign-out
+const userUtils = require('../utils/user_utils');
+
+// User data, they are containing sign-in credentials
+const userData = require('../utils/users_data');
+
+// URL Prefix
+const API_URL_PREFIX = '{{ apiUrlPrefix }}';
+// Test timeout
+const TEST_TIMEOUT = {{ testTimeout }};
+
+// Loopback access token and user id
+let accessToken, userId, userId2;
+
+describe('Test suite {{ suiteName }} signed in', function() {
+  this.timeout(TEST_TIMEOUT);
+
+  before(function(done) {
+    // Just in case, remove all users before run the tests
+    userUtils.removeAllUsers(function(err, res) {
+      if (err) {
+        return done(err);
+      }
+      // Create the testing user and login with its credentials.
+      userUtils.createAndLoginUser(
+        usersData.users[0],
+        usersData.userRole,
+        (err, res) => {
+          if (err) {
+            return done(err);
+          }
+          userId = res.userId;
+          accessToken = res.id;
+          done();
+        }
+      );
+    });
+  });
+
+  after(function(done) {
+    // Remove all users after running the tests
+    userUtils.removeAllUsers(done);
+  });
+
+  {{#each testData }}
+  /*
+   * {{ summary }}
+   * operationId: {{ operationId }}
+   */
+  it('{{ it summary path }}', function(done) {
+{{{ dataConstants parameters }}}    const url = {{{ url path }}};
+
+    supertest(global.app)
+    .{{ method }}(url)
+    .expect('Content-Type', /json/){{ bodyParams parameters}}{{{ sendFormdata parameters}}}{{{ queryParams parameters}}}
+    .query({'access_token': accessToken})
+    .expect(401)
+    .end(function(err, res) {
+      if (err) {
+        return done(err);
+      }
+      done();
+    });
+  });
+  {{/each}}
+});

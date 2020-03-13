@@ -1,0 +1,52 @@
+'use strict';
+/* eslint max-len: 0 */
+
+/*
+ *
+ * {{ suiteName }}
+ * Not signed in testing
+ */
+
+const supertest = require('supertest');
+
+// URL Prefix
+const API_URL_PREFIX = '{{ apiUrlPrefix }}';
+// Test timeout
+const TEST_TIMEOUT = {{ testTimeout }};
+
+// Loopback access token and user id
+let accessToken, userId;
+
+describe('Test suite {{ suiteName }} not signed in', function() {
+  this.timeout(TEST_TIMEOUT);
+
+  before(function(done) {
+    // Set the accessToken and userId before all tests in this block
+    // You can get this values with the log in API call
+    accessToken = null;
+    userId = null;
+    done();
+  });
+
+  {{#each testData }}
+  /*
+   * {{ summary }}
+   * operationId: {{ operationId }}
+   */
+  it('{{ it summary path }}', function(done) {
+{{{ dataConstants parameters }}}    const url = {{{ url path }}};
+
+    supertest(global.app)
+    .{{ method }}(url)
+    .expect('Content-Type', /json/){{ bodyParams parameters}}{{{ sendFormdata parameters}}}{{{ queryParams parameters}}}
+    .query({'access_token': accessToken})
+    .expect(401)
+    .end(function(err, res) {
+      if (err) {
+        return done(err);
+      }
+      done();
+    });
+  });
+  {{/each}}
+});
