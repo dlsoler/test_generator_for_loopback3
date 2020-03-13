@@ -1,0 +1,40 @@
+{
+  "name": "lb3-testing",
+  "version": "1.0.0",
+  "main": "server/server.js",
+  "engines": {
+    "node": ">=4"
+  },
+  "scripts": {
+    "lint": "eslint ./test",
+    "start": "node .",
+    "posttest": "npm run lint",
+    "test": "cross-env NODE_ENV=testing ./node_modules/.bin/mocha test/api/**/*-test.js",
+    "testing-server": "cross-env NODE_ENV=testing node .",
+    "create-api-json": "lb export-api-def --json --output ./test/api_v1/specs/specs.json"
+  },
+  "dependencies": {
+    "compression": "^1.0.3",
+    "cors": "^2.5.2",
+    "helmet": "^3.10.0",
+    "loopback-boot": "^2.6.5",
+    "serve-favicon": "^2.0.1",
+    "strong-error-handler": "^3.0.0",
+    "loopback-component-explorer": "^6.0.0",
+    "loopback": "^3.19.0"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "cross-env": "^7.0.2",
+    "eslint": "^3.17.1",
+    "eslint-config-loopback": "^8.0.0",
+    "mocha": "^7.1.0",
+    "supertest": "^4.0.2"
+  },
+  "repository": {
+    "type": "",
+    "url": ""
+  },
+  "license": "UNLICENSED",
+  "description": "lb3-testing"
+}
