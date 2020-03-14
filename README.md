@@ -1,4 +1,7 @@
-# Plop generator to create Loopback 3 application test suites
+# Plop generator to create Loopback 3 application test suites (Generador de tests para Loopback 3 basado en PLOP)
+
+[Clic aquí para leer el README original en español](./README_es.md)
+
 
 This micro generator creates a suite of tests based on the Loopback 3 definitions of an API.
 
@@ -20,10 +23,12 @@ lb export-api-def --json > testing_data/specs.json
 
 There is two generators. The former creates test to test the API with a signed-in user. The second one tests the API with a not signed in user.
 
+These two types of tests are important if you have defined an access control list (ACL), which prevents certain operations from being performed by users who have not signed in.
+
 
 ## How to use this tests
 
--   Install the necessary dependencies in your project:
+-   Install the necessary dependencies for the tests in your project:
 
 ```shell
 npm install --save-dev mocha chai supertest cross-env
